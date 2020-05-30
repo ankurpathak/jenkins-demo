@@ -20,7 +20,7 @@ node {
             sshPut remote: remote, from: 'shutdown.sh', into: '/home/vagrant/deployment/'
             sshPut remote: remote, from: 'startup.sh', into: '/home/vagrant/deployment/'
             sshPut remote: remote, from: 'restart.sh', into: '/home/vagrant/deployment/'
-            sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 shutdown.sh; ./shutdown.sh'
+            sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 shutdown.sh; ./shutdown.sh', failOnError: false
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; rm *.war', failOnError: false
             sshPut remote: remote, from: 'target/*.war', into: '/home/vagrant/deployment/'
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 start.sh'
