@@ -1,2 +1,2 @@
 #!/bin/bash
-kill $(cat /path/to/app/pid.file)
+kill $(cat /home/vagrant/deployment/pid.file)

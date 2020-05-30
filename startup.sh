@@ -1,3 +1,3 @@
 #!/bin/bash
-nohup java -jar /path/to/app/hello-world.jar > /path/to/log.txt 2>&1 &
-echo $! > /path/to/app/pid.file
+nohup java -jar /home/vagrant/deployment/*.war > /home/vagrant/deployment/log.txt 2>&1 &
+echo $! > /home/vagrant/deployment/pid.file
