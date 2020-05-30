@@ -13,6 +13,7 @@ node {
         stage("Maven Build"){
             sh """
                 mvn clean package
+                mv target/jenkins-demo*.war target/jenkins-demo.war
             """
         }
         stage("SSH Steps Rocks!") {
@@ -22,7 +23,7 @@ node {
             sshPut remote: remote, from: 'restart.sh', into: '/home/vagrant/deployment/'
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 shutdown.sh; ./shutdown.sh', failOnError: false
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; rm *.war', failOnError: false
-            sshPut remote: remote, from: 'target/*.war', into: '/home/vagrant/deployment/'
+            sshPut remote: remote, from: 'target/jenkins-demo.war', into: '/home/vagrant/deployment/'
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 start.sh'
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 restart.sh; ./restart.sh'
             sshRemove remote: remote, path: '/home/vagrant/deployment/start.sh'
