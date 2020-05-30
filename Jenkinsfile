@@ -24,9 +24,9 @@ node {
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 shutdown.sh; ./shutdown.sh', failOnError: false
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; rm *.war', failOnError: false
             sshPut remote: remote, from: 'target/jenkins-demo.war', into: '/home/vagrant/deployment/'
-            sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 start.sh'
+            sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 startup.sh'
             sshCommand remote: remote, command: 'cd /home/vagrant/deployment; chmod 777 restart.sh; ./restart.sh'
-            sshRemove remote: remote, path: '/home/vagrant/deployment/start.sh'
+            sshRemove remote: remote, path: '/home/vagrant/deployment/startup.sh'
             sshRemove remote: remote, path: '/home/vagrant/deployment/restart.sh'
             sshRemove remote: remote, path: '/home/vagrant/deployment/shutdown.sh'
         }
