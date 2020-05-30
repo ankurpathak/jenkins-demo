@@ -7,6 +7,14 @@ node {
     withCredentials([sshUserPrivateKey(credentialsId: 'vagrant-key', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'vagrant')]) {
         remote.user = vagrant
         remote.identityFile = identity
+        stage("Git Checkout"){
+           git 'https://github.com/ankurpathak/jenkins-demo.git'
+        }
+        stage("Maven Build"){
+            sh """
+                mvn clean package
+            """
+        }
         stage("SSH Steps Rocks!") {
             sshCommand remote: remote, command: 'cd /home/vagrant; mkdir deployment', failOnError: false
             sshPut remote: remote, from: 'shutdown.sh', into: '/home/vagrant/deployment/'
