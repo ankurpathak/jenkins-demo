@@ -3,10 +3,18 @@ node {
         git 'https://github.com/ankurpathak/jenkins-demo.git'
     }
 
-    stage("Maven Build"){
+    /* stage("Maven Build"){
         withEnv(['MAVEN_HOME=/var/jenkins_home/.sdkman/candidates/maven/current']){
             sh '${MAVEN_HOME}/bin/mvn clean package'
         }
+    } */
+
+    stage("Maven Build"){
+        def mvnHome = tool name: '3.6.3', type: 'maven'
+        def mvnCmd = "${mvnHome}/bin/mvn"
+        sh "${mvnCmd} clean package"
     }
+
+
 
 }
