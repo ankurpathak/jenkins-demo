@@ -4,11 +4,8 @@ node {
     }
 
     stage("Maven Build"){
-        withEnv([
-            'MAVEN_HOME=/var/jenkins_home/.sdkman/candidates/maven/current',
-            'PATH+WHATEVER=$MAVEN_HOME/bin'
-        ]) {
-            sh 'mvn clean package'
+        withEnv(['MAVEN_HOME=/var/jenkins_home/.sdkman/candidates/maven/current']){
+            sh '${MAVEN_HOME}/bin/mvn clean package'
         }
     }
 
