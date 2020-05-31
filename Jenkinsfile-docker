@@ -1,3 +1,15 @@
 node {
+    stage("Git Checkout"){
+        git 'https://github.com/ankurpathak/jenkins-demo.git'
+    }
+
+    stage("Maven Build"){
+        withEnv([
+            'MAVEN_HOME=/var/jenkins_home/.sdkman/candidates/maven/current',
+            'PATH=$MAVEN_HOME/bin:$PATH'
+        ]) {
+            sh 'mvn clean package'
+        }
+    }
 
 }
